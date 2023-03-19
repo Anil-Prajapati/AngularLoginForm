@@ -7,25 +7,36 @@ export class UserAuthService {
 
   constructor() { }
 
-  public setRoles(roles: []){
-    localStorage.setItem('roles', JSON.stringify(roles));
+  public setRoles(role: []){
+    localStorage.setItem('roles', JSON.stringify(role));
   }
 
-  public getRoles(): [] {
-    const rolesString = localStorage.getItem('roles');
-    if (rolesString !== null) {
-      return JSON.parse(rolesString);
-    } else {
-      return [];
+  // public getRoles(): [] {
+  //   const rolesString = localStorage.getItem('role');
+  //   if (rolesString !== null) {
+  //     return JSON.parse(rolesString);
+  //   } else {
+  //     return [];
+  //   }
+  // }
+
+  public getRole(){
+    let userStr = localStorage.getItem("roles");
+    if(userStr != null)
+    {
+      return JSON.parse(userStr);
+    }else{
+    
+      return null;
     }
   }
 
-  public setToken(jwtToken:string){
-    localStorage.setItem('jwtToken',jwtToken);
+  public setToken(token:string){
+    localStorage.setItem('token',token);
   }
 
   public getToken(): string {
-    const token = localStorage.getItem('jwtToken');
+    const token = localStorage.getItem('token');
     if (token !== null) {
       return token;
     } else {
@@ -38,6 +49,6 @@ export class UserAuthService {
   }
 
   public isLoggedIn(){
-    this.getRoles() && this.getToken();
+    this.getRole() && this.getToken();
   }
 }

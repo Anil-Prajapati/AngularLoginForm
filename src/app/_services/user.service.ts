@@ -18,22 +18,23 @@ export class UserService {
   public login(loginData:any){
         return this.httpClient.post(this.PATH_OF_API + "/login",loginData,{ headers: this.requestHeader });
   }
-  // public roleMatch(allowedRoles: any){
-  //       let isMatch = false
-  //       const userRoles = this.userAuthService.getRoles();
-  //       console.log(userRoles, 'userRoles')
-  //       if(userRoles !=null && userRoles){
-  //         for(let i=0; i<userRoles.length; i++){
-  //           for(let j=0; j<allowedRoles.length; j++){
-  //             if(userRoles[i] === allowedRoles[j]){
-  //               isMatch=true;
-  //               return isMatch;
-  //             }else{
-  //               return isMatch;
-  //             }
-  //           }
-  //         }
-  //       }
-  // }
 
+
+  public roleMatch(allowedRoles: string[]): boolean {
+    let isMatch = false;
+    const userRoles: any = this.userAuthService.getRole();
+  
+    if (userRoles != null && userRoles) {
+      for (let i = 0; i < userRoles.length; i++) {
+        for (let j = 0; j < allowedRoles.length; j++) {
+          if (userRoles === allowedRoles[j]) {
+            isMatch = true;
+            break;
+          }
+        }
+      }
+    }
+    return isMatch;
+  }
+  
 }

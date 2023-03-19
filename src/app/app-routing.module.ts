@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { UserComponent } from './user/user.component';
+import { AuthGuard } from './_auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -15,8 +16,30 @@ const routes: Routes = [
   },
   {
     path:"admin",
-    component:AdminComponent
+    component:AdminComponent,
+    canActivate:[AuthGuard],
+    data:{role:['Admin']}
   },
+  {
+    path:"product",
+    component:ProductComponent,
+    canActivate:[AuthGuard],
+    data:{role:['Product']}
+  },
+  {
+    path:"order",
+    component:OrderComponent,
+    canActivate:[AuthGuard],
+    data:{role:['Order']}
+  },
+
+  {
+    path:"user",
+    component:UserComponent,
+    canActivate:[AuthGuard],
+    data:{role:['User']}
+  },
+ 
   
   {
     path:"login",
@@ -27,18 +50,7 @@ const routes: Routes = [
     component:ForbiddenComponent
   },
   
-  {
-    path:"user",
-    component:UserComponent
-  },
-  {
-    path:"product",
-    component:ProductComponent
-  },
-  {
-    path:"order",
-    component:OrderComponent
-  }
+ 
 ];
 
 @NgModule({
